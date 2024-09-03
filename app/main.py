@@ -4,12 +4,27 @@ from fastapi import FastAPI
 import uvicorn
 
 from app.routers import greeting
+from app.routers.tags import TAGS_METADATA, Tags
 
-app = FastAPI()
+app = FastAPI(
+    title="Hello app",
+    description="Say hello to all",
+    summary="Simple app",
+    version="0.0.1",
+    terms_of_service="http://example.com/terms/",
+    contact={
+        "name": "anon",
+        "email": "spam_box@example.com"
+    },
+    license_info={
+        "name": "no license"
+    },
+    openapi_tags=TAGS_METADATA
+)
 app.include_router(greeting.router)
 
 
-@app.get("/", tags=["root"])
+@app.get("/", tags=[Tags.ROOT])
 def root():
     """Root url"""
     return "Root page"
