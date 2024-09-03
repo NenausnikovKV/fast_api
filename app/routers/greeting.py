@@ -1,6 +1,7 @@
 """hello routers"""
 
 from fastapi import Body, Header, APIRouter
+from pydantic import BaseModel
 
 from app.routers.tags import Tags
 
@@ -55,3 +56,21 @@ def say_hi_body(
 def say_hi_headers(who: str = Header()) -> str:
     """Headers variable url"""
     return f"Hello {who}"
+
+
+class GreetingBody(BaseModel):
+    """Model of greeting"""
+    greeting_type: str
+    address_target: str
+
+
+@router.get("/better_body")
+def say_greeting_to_address(greeting_type: str = "Hello", address_target: str = "world") -> GreetingBody:
+    """return model of greeting for given params"""
+    return GreetingBody(greeting_type=greeting_type, address_target=address_target)
+
+
+@router.post("/get_and_return_body")
+def get_greeting(greeting_body: GreetingBody) -> GreetingBody:
+    """return model of greeting for given params"""
+    return GreetingBody(**greeting_body.model_dump())
