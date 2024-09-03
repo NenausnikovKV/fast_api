@@ -1,44 +1,18 @@
 """Simple fastApi view"""
 
-from fastapi import FastAPI, Body, Header
+from fastapi import FastAPI
 import uvicorn
 
+from app.routers import greeting
+
 app = FastAPI()
+app.include_router(greeting.router)
 
 
-@app.get("/")
+@app.get("/", tags=["root"])
 def root():
     """Root url"""
-    return "Hello world"
-
-
-@app.get("/hi/{who}")
-def say_hi_path(who: str) -> str:
-    """Path variable url"""
-    return f"Hello {who}"
-
-
-@app.get("/hi")
-def say_hi_query_name(who: str = "me") -> str:
-    """query variable url"""
-    return f"Hello {who}"
-
-
-@app.post("/hi_body")
-def say_hi_body(
-        who: str = Body(embed=True),
-        other: str = Body(embed=True, default="others")
-) -> str:
-    """
-    query variable url
-    use embed for request body processing as simple json
-    """
-    return f"Hello {who} and {other}"
-
-
-@app.post("/hi_header")
-def say_hi_headers(who: str = Header()) -> str:
-    return f"Hello {who}"
+    return "Root page"
 
 
 if __name__ == '__main__':
