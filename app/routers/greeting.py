@@ -5,11 +5,15 @@ from fastapi import Body, Header, APIRouter
 from app.routers.tags import Tags
 
 
-router = APIRouter()
+router = APIRouter(
+    prefix="/hi",
+    tags=[Tags.GREETING],
+    responses={404: {"description": "Not found"}}
+)
 
 
 @router.get(
-    "/hi",
+    "/",
     tags=[Tags.GREETING],
     summary="say hello world",
     description="simple root router method which return one constant line",
@@ -23,19 +27,19 @@ def say_hi():
     return "Hello world"
 
 
-@router.get("/hi/path/{who}", tags=[Tags.GREETING])
+@router.get("/path/{who}", tags=[Tags.GREETING])
 def say_hi_path(who: str) -> str:
     """Path variable url"""
     return f"Hello {who}"
 
 
-@router.get("/hi/query", tags=[Tags.GREETING])
+@router.get("/query", tags=[Tags.GREETING])
 def say_hi_query_name(who: str = "me") -> str:
     """query variable url"""
     return f"Hello {who}"
 
 
-@router.post("/hi/body", tags=[Tags.GREETING])
+@router.post("/body", tags=[Tags.GREETING])
 def say_hi_body(
         who: str = Body(embed=True),
         other: str = Body(embed=True, default="others")
@@ -47,7 +51,7 @@ def say_hi_body(
     return f"Hello {who} and {other}"
 
 
-@router.post("/hi/header", tags=[Tags.GREETING])
+@router.post("/header", tags=[Tags.GREETING])
 def say_hi_headers(who: str = Header()) -> str:
     """Headers variable url"""
     return f"Hello {who}"
