@@ -3,7 +3,7 @@
 from fastapi import FastAPI
 import uvicorn
 
-from app.routers import greeting
+from app.routers import greeting, product
 from app.routers.tags import TAGS_METADATA, Tags
 
 app = FastAPI(
@@ -22,6 +22,7 @@ app = FastAPI(
     openapi_tags=TAGS_METADATA
 )
 app.include_router(greeting.router)
+app.include_router(product.router)
 
 
 @app.get("/", tags=[Tags.ROOT])

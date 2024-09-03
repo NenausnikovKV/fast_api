@@ -7,6 +7,7 @@ class Tags(Enum):
     """tags for router docs"""
     GREETING = "hi"
     ROOT = "root"
+    PRODUCT = "product"
 
 
 TAGS_METADATA = [
@@ -16,5 +17,9 @@ TAGS_METADATA = [
     {
         "name": Tags.GREETING,
         "description": "Say hello functions"
+    },
+    {
+        "name": Tags.PRODUCT,
+        "description": "Shop product"
     }
 ]
