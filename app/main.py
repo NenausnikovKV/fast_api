@@ -8,7 +8,7 @@ from app.routers.tags import TAGS_METADATA, Tags
 
 app = FastAPI(
     title="Hello app",
-    description="Say hello to all",
+    description="Say hello to everyone",
     summary="Simple app",
     version="0.0.1",
     terms_of_service="http://example.com/terms/",
