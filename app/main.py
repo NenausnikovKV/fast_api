@@ -3,9 +3,9 @@
 from fastapi import FastAPI
 import uvicorn
 
-from app.routers import greeting
+from app.routers.greeting import greeting
 from app.routers.shop_products import product
-from app.routers.tags import TAGS_METADATA, Tags
+from app.tags import TAGS_METADATA, Tags
 
 app = FastAPI(
     title="Hello app",

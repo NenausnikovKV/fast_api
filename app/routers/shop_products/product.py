@@ -7,7 +7,7 @@ from app.database import engine
 from app.dependencies import get_db
 from app.routers.shop_products import models, crud
 from app.routers.shop_products import schemas
-from app.routers.tags import Tags
+from app.tags import Tags
 
 # create db tables
 models.Base.metadata.create_all(bind=engine)

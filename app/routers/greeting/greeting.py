@@ -3,7 +3,7 @@
 from fastapi import Body, Header, APIRouter
 from pydantic import BaseModel
 
-from app.routers.tags import Tags
+from app.tags import Tags
 
 
 router = APIRouter(

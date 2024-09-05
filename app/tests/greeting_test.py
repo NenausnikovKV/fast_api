@@ -1,15 +1,4 @@
-"""test for project"""
-
-import pytest
-from starlette.testclient import TestClient
-
-from app.main import app
-
-
-@pytest.fixture(scope="module", name="test_client")
-def client():
-    """client module fixture"""
-    return TestClient(app)
+"""Greeting test"""
 
 
 def test_root(test_client):
